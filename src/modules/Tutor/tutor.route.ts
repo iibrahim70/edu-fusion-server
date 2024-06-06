@@ -1,11 +1,11 @@
 import { Router } from 'express';
+import { TutorServices } from './tutor.service';
 
 const router = Router();
 
-// Course Routes
-router.post('/courses');
-router.get('/courses/:courseId');
+router.post('/create-course', TutorServices?.createCourseIntoDB);
 
+router.get('/courses/:courseId');
 // Module Routes
 router.post('/courses/:courseId/modules');
 router.get('/courses/:courseId/modules');

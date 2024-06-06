@@ -14,11 +14,16 @@ const courseSchema = new Schema<ICourse>(
       ref: 'User',
       required: true,
     },
-    sessionBanner: {
+    courseTitle: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    bannerImages: {
       type: [String],
       required: true,
     },
-    sessionDescription: {
+    courseDescription: {
       type: String,
       required: true,
     },
@@ -38,7 +43,7 @@ const courseSchema = new Schema<ICourse>(
       type: Date,
       required: true,
     },
-    sessionDuration: {
+    courseDuration: {
       type: String,
       required: true,
     },
