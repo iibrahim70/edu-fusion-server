@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import { TutorServices } from './tutor.service';
+import { CourseControllers } from './course.controller';
 
 const router = Router();
 
-router.post('/create-course', TutorServices?.createCourseIntoDB);
+router.post('/create-course', CourseControllers?.createCourse);
 
 router.get('/courses/:courseId');
 // Module Routes
@@ -20,4 +20,4 @@ router.post('/modules/:moduleId/ratings');
 // Comment Routes
 router.post('/subModules/:subModuleId/comments');
 
-export const TutorRoutes = router;
+export const CourseRoutes = router;
