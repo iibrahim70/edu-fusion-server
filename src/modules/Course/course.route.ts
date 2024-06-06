@@ -3,6 +3,7 @@ import { CourseControllers } from './course.controller';
 
 const router = Router();
 
+router.get('/', CourseControllers?.createCourse);
 router.post('/create-course', CourseControllers?.createCourse);
 
 router.get('/courses/:courseId');
