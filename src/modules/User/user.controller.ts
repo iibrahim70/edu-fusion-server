@@ -9,18 +9,18 @@ const createUser = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus?.OK,
     success: true,
-    message: 'Student created successfully!',
+    message: 'User has been created successfully!',
     data: result,
   });
 });
 
-const getStudents = catchAsync(async (req, res) => {
-  const result = await UserServices?.getAllStudentsFromDB();
+const getUsers = catchAsync(async (req, res) => {
+  const result = await UserServices?.getUsersFromDB();
 
   sendResponse(res, {
     statusCode: httpStatus?.OK,
     success: true,
-    message: 'Retrieved student list successfully!',
+    message: 'User list retrieved successfully!',
     data: result,
   });
 });
@@ -31,13 +31,25 @@ const createTestimonial = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus?.OK,
     success: true,
-    message: 'Testimonial created successfully!',
+    message: 'Testimonial has been created successfully!',
+    data: result,
+  });
+});
+
+const getTestimonials = catchAsync(async (req, res) => {
+  const result = await UserServices?.getTestimonialsFromDB();
+
+  sendResponse(res, {
+    statusCode: httpStatus?.OK,
+    success: true,
+    message: 'Testimonials retrieved successfully!',
     data: result,
   });
 });
 
 export const UserControllers = {
   createUser,
-  getStudents,
+  getUsers,
   createTestimonial,
+  getTestimonials,
 };
