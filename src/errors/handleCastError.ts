@@ -3,7 +3,7 @@ import httpStatus from 'http-status';
 import {
   IErrorSources,
   IGenericErrorResponse,
-} from '../interfaces/error.interface';
+} from '../interface/error.interface';
 
 const handleCastError = (
   err: mongoose.Error.CastError,
