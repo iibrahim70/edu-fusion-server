@@ -1,9 +1,10 @@
 import { Router } from 'express';
+import { ModuleControllers } from './module.controller';
 
 const router = Router();
 
 router.get('/');
-router.post('/create-module');
+router.post('/create-module', ModuleControllers?.createModule);
 
 // SubModule Routes
 router.post('/modules/:moduleId/subModules');

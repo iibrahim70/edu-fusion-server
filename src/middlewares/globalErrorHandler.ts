@@ -1,3 +1,6 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import { ErrorRequestHandler } from 'express';
 import { ZodError } from 'zod';
 import { IErrorSources } from '../interface/error.interface';
@@ -10,7 +13,7 @@ import config from '../config';
 import httpStatus from 'http-status';
 
 // Error handler middleware for handling global errors
-const globalErrorHandler: ErrorRequestHandler = (err, req, res) => {
+const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
   // Setting default values for the response
   let statusCode = err?.statusCode || httpStatus?.INTERNAL_SERVER_ERROR;
   let message = err?.message || httpStatus['500_MESSAGE'];
@@ -77,7 +80,7 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res) => {
   }
 
   // Returning the error response
-  return res.status(statusCode).json({
+  return res?.status(statusCode)?.json({
     success: false,
     message,
     errorSources,
