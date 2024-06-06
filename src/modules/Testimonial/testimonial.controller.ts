@@ -7,7 +7,7 @@ const createTestimonial = catchAsync(async (req, res) => {
   const result = await TestimonialServices?.createTestimonialIntoDB(req?.body);
 
   sendResponse(res, {
-    statusCode: httpStatus?.OK,
+    statusCode: httpStatus?.CREATED,
     success: true,
     message: 'Testimonial created successfully!',
     data: result,

@@ -1,8 +1,6 @@
 import { ObjectId } from 'mongoose';
 
-// Course Interface
 export interface ICourse {
-  _id: ObjectId;
   createdBy: ObjectId;
   courseTitle: string;
   bannerImages: string[];
