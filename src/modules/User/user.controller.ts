@@ -7,7 +7,7 @@ const createUser = catchAsync(async (req, res) => {
   const result = await UserServices?.createUserIntoDB(req?.body);
 
   sendResponse(res, {
-    statusCode: httpStatus?.OK,
+    statusCode: httpStatus?.CREATED,
     success: true,
     message: 'User created successfully!',
     data: result,
