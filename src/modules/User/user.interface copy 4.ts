@@ -1,4 +1,4 @@
-export interface IUser {
+interface IUser {
   fullName: string;
   email: string;
   role: 'student' | 'tutor' | 'admin';
