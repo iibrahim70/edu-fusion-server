@@ -1,6 +1,6 @@
 import { COURSE_STATUS } from './course.constant';
-import { ICourse } from './course.interface';
-import { Course } from './course.model';
+import { ICourse } from './module.interface';
+import { Course } from './module.model';
 
 const createCourseIntoDB = async (payload: ICourse) => {
   // enforce status to be pending
