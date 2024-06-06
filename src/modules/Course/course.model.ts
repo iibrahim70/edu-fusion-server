@@ -68,6 +68,13 @@ const courseSchema = new Schema<ICourse>(
   { timestamps: true },
 );
 
+// method to remove sensitive fields before returning course object as JSON
+courseSchema.methods.toJSON = function () {
+  const courseObject = this.toObject();
+  delete courseObject?.status;
+  return courseObject;
+};
+
 export const Course = model<ICourse>('Course', courseSchema);
 
 const moduleSchema = new Schema<IModule>(
