@@ -27,7 +27,21 @@ const getStudents = catchAsync(async (req, res) => {
   });
 });
 
+const createTestimonial = catchAsync(async (req, res) => {
+  const userData = req?.body;
+
+  const result = await UserServices?.createUserIntoDB(userData);
+
+  sendResponse(res, {
+    statusCode: httpStatus?.OK,
+    success: true,
+    message: 'Testimonial created successfully!',
+    data: result,
+  });
+});
+
 export const UserControllers = {
   createUser,
   getStudents,
+  createTestimonial,
 };
