@@ -2,8 +2,15 @@ import httpStatus from 'http-status';
 import ApiError from '../../errors/ApiError';
 import { IUser } from './user.interface';
 import { User } from './user.model';
+import { USER_ROLE } from './user.constant';
 
-const createStudentIntoDB = async (payload: IUser) => {
+const createUserIntoDB = async (payload: IUser) => {
+  const allowedRoles = [USER_ROLE?.student, USER_ROLE?.tutor, USER_ROLE?.admin];
+
+  if (!allowedRoles?.includes(payload?.role)) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Invalid role!');
+  }
+
   if (payload?.role === 'admin') {
     throw new ApiError(httpStatus?.FORBIDDEN, 'Admin creation not allowed!');
   }
@@ -17,6 +24,12 @@ const createStudentIntoDB = async (payload: IUser) => {
   return result;
 };
 
+const getAllStudentsFromDB = async () => {
+  const result = User.find();
+  return result;
+};
+
 export const UserServices = {
-  createStudentIntoDB,
+  createUserIntoDB,
+  getAllStudentsFromDB,
 };
