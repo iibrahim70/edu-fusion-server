@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import { ITestimonial, IUser } from './user.interface';
+import { ITestimonial, IUser } from './tutor.interface';
 
 // define the User schema
 const userSchema = new Schema<IUser>(
@@ -43,7 +43,15 @@ const testimonialSchema = new Schema<ITestimonial>(
   {
     createdBy: {
       type: Schema.Types.ObjectId, // reference to a User
+      required: true,
       ref: 'User', // reference to the User model
+    },
+    userName: {
+      type: String,
+      required: true,
+    },
+    avatar: {
+      type: String,
       required: true,
     },
     message: {
