@@ -10,7 +10,7 @@ import config from '../config';
 import httpStatus from 'http-status';
 
 // Error handler middleware for handling global errors
-const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
+const globalErrorHandler: ErrorRequestHandler = (err, req, res) => {
   // Setting default values for the response
   let statusCode = err?.statusCode || httpStatus?.INTERNAL_SERVER_ERROR;
   let message = err?.message || httpStatus['500_MESSAGE'];
