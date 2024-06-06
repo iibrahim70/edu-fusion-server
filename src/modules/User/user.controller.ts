@@ -6,7 +6,7 @@ import { UserServices } from './user.service';
 const createUser = catchAsync(async (req, res) => {
   const userData = req?.body;
 
-  const result = UserServices?.createUserIntoDB(userData);
+  const result = await UserServices?.createUserIntoDB(userData);
 
   sendResponse(res, {
     statusCode: httpStatus?.OK,
@@ -17,7 +17,7 @@ const createUser = catchAsync(async (req, res) => {
 });
 
 const getStudents = catchAsync(async (req, res) => {
-  const result = UserServices?.getAllStudentsFromDB();
+  const result = await UserServices?.getAllStudentsFromDB();
 
   sendResponse(res, {
     statusCode: httpStatus?.OK,
