@@ -25,7 +25,7 @@ const createUserIntoDB = async (payload: IUser) => {
 };
 
 const getAllStudentsFromDB = async () => {
-  const result = User.find();
+  const result = await User.find();
   return result;
 };
 
