@@ -15,7 +15,7 @@ import httpStatus from 'http-status';
 // Error handler middleware for handling global errors
 const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
   // Setting default values for the response
-  let statusCode = err?.statusCode || httpStatus.INTERNAL_SERVER_ERROR;
+  let statusCode = err?.statusCode || httpStatus?.INTERNAL_SERVER_ERROR;
   let message = err?.message || httpStatus['500_MESSAGE'];
   let errorSources: IErrorSources[] = [
     {
@@ -59,7 +59,7 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
   // Handling ApiErrors (custom error class)
   else if (err instanceof ApiError) {
     statusCode = err?.statusCode;
-    message = err.message;
+    message = err?.message;
     errorSources = [
       {
         path: '',
@@ -70,7 +70,7 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
 
   // Handling general errors (instances of Error)
   else if (err instanceof Error) {
-    message = err.message;
+    message = err?.message;
     errorSources = [
       {
         path: '',
@@ -84,7 +84,7 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
     success: false,
     message,
     errorSources,
-    stack: config.nodeEnv === 'development' ? err?.stack : null,
+    stack: config?.nodeEnv === 'development' ? err?.stack : null,
   });
 };
 
