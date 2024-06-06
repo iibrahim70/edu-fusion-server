@@ -1,6 +1,8 @@
-interface IUser {
-  fullName: string;
-  email: string;
-  role: 'student' | 'tutor' | 'admin';
-  avatar: string;
-}
+import { Router } from 'express';
+import { UserControllers } from './user.controller';
+
+const router = Router();
+
+router.post('/create-user', UserControllers?.createStudent);
+
+export const UserRoutes = router;
