@@ -20,4 +20,4 @@ router.post('/modules/:moduleId/ratings');
 // Comment Routes
 router.post('/subModules/:subModuleId/comments');
 
-export const UserRoutes = router;
+export const TutorRoutes = router;
