@@ -5,7 +5,7 @@ import {
   IModule,
   IRating,
   ISubModule,
-} from './tutor.interface';
+} from './course.interface';
 
 const courseSchema = new Schema<ICourse>(
   {

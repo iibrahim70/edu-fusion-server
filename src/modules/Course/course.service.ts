@@ -1,11 +1,11 @@
-import { ICourse } from './tutor.interface';
-import { Course } from './tutor.model';
+import { ICourse } from './course.interface';
+import { Course } from './course.model';
 
 const createCourseIntoDB = async (payload: ICourse) => {
   const result = await Course?.create(payload);
   return result;
 };
 
-export const TutorServices = {
+export const CourseServices = {
   createCourseIntoDB,
 };
