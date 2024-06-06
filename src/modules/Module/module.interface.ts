@@ -1,18 +1,16 @@
 import { ObjectId } from 'mongoose';
 
 export interface IModule {
-  _id: ObjectId;
   courseId: ObjectId; // Reference to the Course
-  moduleId: number;
+  moduleNum: number;
   title: string;
   description: string;
 }
 
 // SubModule Interface
 export interface ISubModule {
-  _id: ObjectId;
   moduleId: ObjectId; // Reference to the Module
-  subModuleId: number;
+  subModuleNum: number;
   title: string;
   imageUrl?: string[];
   videoUrl: string;
