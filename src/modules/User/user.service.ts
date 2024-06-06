@@ -7,9 +7,14 @@ import { USER_ROLE } from './user.constant';
 const createUserIntoDB = async (payload: IUser) => {
   const allowedRoles = [USER_ROLE?.student, USER_ROLE?.tutor, USER_ROLE?.admin];
 
+  // Set default role to 'student' if no role is provided
+  if (!payload?.role) {
+    payload.role = USER_ROLE?.student;
+  }
+
   // check if the provided role is valid
   if (!allowedRoles?.includes(payload?.role)) {
-    throw new ApiError(httpStatus.BAD_REQUEST, 'Invalid role!');
+    throw new ApiError(httpStatus?.BAD_REQUEST, 'Invalid role!');
   }
 
   // disallow creation of admin users through this controller
@@ -18,7 +23,7 @@ const createUserIntoDB = async (payload: IUser) => {
   }
 
   // check if a user with the same email already exists
-  const existingUser = await User.findOne({ email: payload?.email });
+  const existingUser = await User?.findOne({ email: payload?.email });
   if (existingUser) {
     throw new ApiError(httpStatus?.CONFLICT, 'User already exists!');
   }

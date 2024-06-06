@@ -1,7 +1,7 @@
 import httpStatus from 'http-status';
 import catchAsync from '../../helpers/catchAsync';
 import sendResponse from '../../helpers/sendResponse';
-import { TestimonialServices } from './user.service';
+import { TestimonialServices } from './testimonial.service';
 
 const createTestimonial = catchAsync(async (req, res) => {
   const result = await TestimonialServices?.createTestimonialIntoDB(req?.body);
