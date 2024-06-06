@@ -24,8 +24,8 @@ const createUserIntoDB = async (payload: IUser) => {
   return result;
 };
 
-const getAllStudentsFromDB = async () => {
-  const result = await User.find();
+const getUsersFromDB = async () => {
+  const result = await User?.find();
   return result;
 };
 
@@ -34,8 +34,14 @@ const createTestimonialIntoDB = async (payload: ITestimonial) => {
   return result;
 };
 
+const getTestimonialsFromDB = async () => {
+  const result = await Testimonial?.find();
+  return result;
+};
+
 export const UserServices = {
   createUserIntoDB,
-  getAllStudentsFromDB,
+  getUsersFromDB,
   createTestimonialIntoDB,
+  getTestimonialsFromDB,
 };
