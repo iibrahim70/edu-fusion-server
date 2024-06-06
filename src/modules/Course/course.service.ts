@@ -10,6 +10,12 @@ const createCourseIntoDB = async (payload: ICourse) => {
   return result;
 };
 
+const getCoursesFromDB = async () => {
+  const result = await Course?.find()?.populate('createdBy');
+  return result;
+};
+
 export const CourseServices = {
   createCourseIntoDB,
+  getCoursesFromDB,
 };
