@@ -4,13 +4,14 @@ import { ObjectId } from 'mongoose';
 export interface ICourse {
   _id: ObjectId;
   createdBy: ObjectId;
-  sessionBanner: string[];
-  sessionDescription: string;
+  courseTitle: string;
+  bannerImages: string[];
+  courseDescription: string;
   registrationStartDate: Date;
   registrationEndDate: Date;
   classStartDate: Date;
   classEndDate: Date;
-  sessionDuration: string;
+  courseDuration: string;
   registrationFee: number;
   category: string;
   level: string;
@@ -36,7 +37,7 @@ export interface ISubModule {
   imageUrl?: string[];
   videoUrl: string;
   description: string;
-  comments: IComment[];
+  comments?: IComment[];
 }
 
 // Rating Interface

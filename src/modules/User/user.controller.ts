@@ -9,7 +9,7 @@ const createUser = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus?.OK,
     success: true,
-    message: 'User has been created successfully!',
+    message: 'User created successfully!',
     data: result,
   });
 });
@@ -31,7 +31,7 @@ const createTestimonial = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus?.OK,
     success: true,
-    message: 'Testimonial has been created successfully!',
+    message: 'Testimonial created successfully!',
     data: result,
   });
 });
