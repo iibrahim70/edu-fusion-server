@@ -1,7 +1,7 @@
 import httpStatus from 'http-status';
 import ApiError from '../../errors/ApiError';
-import { ITestimonial, IUser } from './user.interface';
-import { Testimonial, User } from './user.model';
+import { IUser } from './user.interface';
+import { User } from './user.model';
 import { USER_ROLE } from './user.constant';
 
 const createUserIntoDB = async (payload: IUser) => {
@@ -32,19 +32,7 @@ const getUsersFromDB = async () => {
   return result;
 };
 
-const createTestimonialIntoDB = async (payload: ITestimonial) => {
-  const result = await Testimonial?.create(payload);
-  return result;
-};
-
-const getTestimonialsFromDB = async () => {
-  const result = await Testimonial?.find();
-  return result;
-};
-
 export const UserServices = {
   createUserIntoDB,
   getUsersFromDB,
-  createTestimonialIntoDB,
-  getTestimonialsFromDB,
 };

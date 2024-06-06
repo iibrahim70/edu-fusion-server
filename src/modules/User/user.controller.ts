@@ -25,31 +25,7 @@ const getUsers = catchAsync(async (req, res) => {
   });
 });
 
-const createTestimonial = catchAsync(async (req, res) => {
-  const result = await UserServices?.createTestimonialIntoDB(req?.body);
-
-  sendResponse(res, {
-    statusCode: httpStatus?.OK,
-    success: true,
-    message: 'Testimonial created successfully!',
-    data: result,
-  });
-});
-
-const getTestimonials = catchAsync(async (req, res) => {
-  const result = await UserServices?.getTestimonialsFromDB();
-
-  sendResponse(res, {
-    statusCode: httpStatus?.OK,
-    success: true,
-    message: 'Testimonials retrieved successfully!',
-    data: result,
-  });
-});
-
 export const UserControllers = {
   createUser,
   getUsers,
-  createTestimonial,
-  getTestimonials,
 };

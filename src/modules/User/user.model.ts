@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import { ITestimonial, IUser } from './user.interface';
+import { IUser } from './user.interface';
 
 // define the User schema
 const userSchema = new Schema<IUser>(
@@ -37,31 +37,3 @@ userSchema.methods.toJSON = function () {
 
 // create the User model using the schema
 export const User = model<IUser>('User', userSchema);
-
-// define the Testimonial schema
-const testimonialSchema = new Schema<ITestimonial>(
-  {
-    createdBy: {
-      type: Schema.Types.ObjectId, // reference to a User
-      ref: 'User', // reference to the User model
-      required: true,
-    },
-    message: {
-      type: String,
-      required: true,
-    },
-    rating: {
-      type: Number,
-      required: true,
-      min: 1, // minimum value for rating
-      max: 5, // maximum value for rating
-    },
-  },
-  { timestamps: true },
-);
-
-// create the Testimonial model using the schema
-export const Testimonial = model<ITestimonial>(
-  'Testimonial',
-  testimonialSchema,
-);
