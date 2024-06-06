@@ -3,7 +3,7 @@ import httpStatus from 'http-status';
 import {
   IErrorSources,
   IGenericErrorResponse,
-} from '../interfaces/error.interface';
+} from '../interface/error.interface';
 
 const handleValidationError = (
   err: mongoose.Error.ValidationError,
