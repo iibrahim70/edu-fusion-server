@@ -28,7 +28,7 @@ const userSchema = new Schema<IUser>(
   { timestamps: true },
 );
 
-// method to remove sensitive fields before returning user object as JSON
+// method to remove sensitive fields before returning User object as JSON
 userSchema.methods.toJSON = function () {
   const userObject = this.toObject();
   delete userObject?.role;
