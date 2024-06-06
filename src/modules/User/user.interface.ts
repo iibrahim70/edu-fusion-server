@@ -9,8 +9,6 @@ export interface IUser {
 
 export interface ITestimonial {
   createdBy: ObjectId;
-  userName: string;
-  avatar: string;
   message: string;
   rating: number;
 }
