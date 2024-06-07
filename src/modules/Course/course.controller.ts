@@ -25,7 +25,21 @@ const getCourses = catchAsync(async (req, res) => {
   });
 });
 
+const getCourseDetails = catchAsync(async (req, res) => {
+  const result = await CourseServices?.getCourseDetailsFromDB(
+    req?.params?.courseId,
+  );
+
+  sendResponse(res, {
+    statusCode: httpStatus?.OK,
+    success: true,
+    message: 'Course details retrieved successfully!',
+    data: result,
+  });
+});
+
 export const CourseControllers = {
   createCourse,
   getCourses,
+  getCourseDetails,
 };

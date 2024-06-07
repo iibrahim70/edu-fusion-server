@@ -4,9 +4,9 @@ import { CourseControllers } from './course.controller';
 const router = Router();
 
 router.get('/', CourseControllers?.getCourses);
-router.post('/create-course', CourseControllers?.createCourse);
+router.get('/:courseId', CourseControllers?.getCourseDetails);
 
-router.get('/courses/:courseId');
+router.post('/create-course', CourseControllers?.createCourse);
 
 // Module Routes
 router.post('/courses/:courseId/modules');
