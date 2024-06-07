@@ -1,10 +1,10 @@
 import { ObjectId } from 'mongoose';
 
 export interface ICourse {
-  createdBy: ObjectId;
-  courseTitle: string;
+  userId: ObjectId;
+  title: string;
   bannerImages: string[];
-  courseDescription: string;
+  description: string;
   registrationStartDate: Date;
   registrationEndDate: Date;
   classStartDate: Date;
