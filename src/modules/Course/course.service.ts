@@ -5,7 +5,7 @@ import { ICourse } from './course.interface';
 import { Course } from './course.model';
 
 const createCourseIntoDB = async (payload: ICourse) => {
-  // enforce status to be pending
+  // Enforce status to be pending
   payload.status = COURSE_STATUS?.pending;
 
   const result = await Course?.create(payload);
@@ -27,17 +27,29 @@ const getCourseDetailsFromDB = async (courseId: string) => {
     throw new ApiError(httpStatus?.NOT_FOUND, 'Course Not Found');
   }
 
-  const result = await Course?.aggregate([
-    // stage 1
+  // Aggregate to get course details including modules and submodules
+  const result = await Course.aggregate([
     {
       $lookup: {
-        from: 'modules', // Ensure this matches the actual collection name
+        from: 'modules',
         localField: '_id',
         foreignField: 'courseId',
         as: 'modules',
+        pipeline: [
+          // Lookup submodules for each module
+          {
+            $lookup: {
+              from: 'submodules',
+              localField: '_id',
+              foreignField: 'moduleId',
+              as: 'submodules',
+            },
+          },
+        ],
       },
     },
   ]);
+
   return result[0];
 };
 
