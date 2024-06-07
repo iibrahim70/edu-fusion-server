@@ -14,7 +14,7 @@ const createCourseIntoDB = async (payload: ICourse) => {
 
 const getCoursesFromDB = async () => {
   const result = await Course?.find()?.populate({
-    path: 'createdBy',
+    path: 'userId',
     select: '-role', // exclude the role field
   });
   return result;
