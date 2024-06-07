@@ -7,12 +7,11 @@ export interface IModule {
   description: string;
 }
 
-// SubModule Interface
 export interface ISubModule {
   moduleId: ObjectId; // Reference to the Module
   subModuleNum: number;
   title: string;
-  imageUrl?: string[];
+  imageUrls?: string[];
   videoUrl: string;
   description: string;
 }
