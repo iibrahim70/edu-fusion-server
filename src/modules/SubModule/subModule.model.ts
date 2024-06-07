@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import { ISubModule } from './submodule.interface';
+import { ISubModule } from './subModule.interface';
 
 const subModuleSchema = new Schema<ISubModule>(
   {
