@@ -1,5 +1,5 @@
 import { SubModule } from './subModule.model';
-import { ISubModule } from './submodule.interface';
+import { ISubModule } from './subModule.interface';
 
 const createSubModuleIntoDB = async (payload: ISubModule) => {
   const result = await SubModule?.create(payload);
