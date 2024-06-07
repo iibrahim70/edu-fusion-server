@@ -7,7 +7,7 @@ const createTestimonialIntoDB = async (payload: ITestimonial) => {
 };
 
 const getTestimonialsFromDB = async () => {
-  const result = await Testimonial?.find()?.populate('createdBy');
+  const result = await Testimonial?.find()?.populate('userId');
   return result;
 };
 
