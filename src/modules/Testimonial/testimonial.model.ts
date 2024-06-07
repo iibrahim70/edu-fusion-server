@@ -4,7 +4,7 @@ import { ITestimonial } from './testimonial.interface';
 // define the Testimonial schema
 const testimonialSchema = new Schema<ITestimonial>(
   {
-    createdBy: {
+    userId: {
       type: Schema?.Types?.ObjectId, // reference to a User
       ref: 'User', // reference to the User model
       required: true,

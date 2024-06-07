@@ -3,12 +3,12 @@ import { ICourse } from './course.interface';
 
 const courseSchema = new Schema<ICourse>(
   {
-    createdBy: {
+    userId: {
       type: Schema.Types.ObjectId,
       ref: 'User',
       required: true,
     },
-    courseTitle: {
+    title: {
       type: String,
       required: true,
       unique: true,
@@ -17,7 +17,7 @@ const courseSchema = new Schema<ICourse>(
       type: [String],
       required: true,
     },
-    courseDescription: {
+    description: {
       type: String,
       required: true,
     },
