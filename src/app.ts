@@ -1,35 +1,15 @@
-import cors, { CorsOptions } from 'cors';
+import cors from 'cors';
 import express, { Request, Response } from 'express';
+import corsOptions from './helpers/cors';
 import router from './routes';
 import globalErrorHandler from './middlewares/globalErrorHandler';
 import notFound from './middlewares/notFound';
-import ApiError from './errors/ApiError';
-import httpStatus from 'http-status';
 
 const app = express();
 
-// whitelist of allowed origins for CORS
-const whitelist = ['http://localhost:5173', 'https://edu-fusion.netlify.app'];
-
-// CORS options to allow requests only from whitelisted origins
-const corsOptions: CorsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist?.indexOf(origin as string) !== -1) {
-      callback(null, true); // Allow request
-    } else {
-      callback(
-        new ApiError(
-          httpStatus?.FORBIDDEN,
-          'CORS request strictly prohibited from this origin',
-        ),
-      ); // Deny request
-    }
-  },
-};
-
 // Middlewares
-app.use(express.json()); // for parse JSON bodies in incoming requests
-app.use(cors(corsOptions)); // for enable CORS with specified options
+app.use(express.json()); // for parsing JSON bodies in incoming requests
+app.use(cors()); // enable CORS globally
 
 // Default route for the root URL
 app.get('/', (req: Request, res: Response) => {
@@ -53,10 +33,10 @@ app.get('/', (req: Request, res: Response) => {
   res.json(serverStatus);
 });
 
-// Application routes under the '/api/v1' path
-app.use('/api/v1', router);
+// Application routes under the '/api/v1' path with specific CORS options
+app.use('/api/v1', cors(corsOptions), router);
 
-// Error-handling Middlewares
+// Error-handling middlewares
 app.use(globalErrorHandler); // Global error handler middleware
 app.use(notFound); // Middleware to handle 404 - Not Found errors
 
