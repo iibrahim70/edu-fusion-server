@@ -8,7 +8,7 @@ const whitelist = ['http://localhost:5173', 'https://edu-fusion.netlify.app'];
 // CORS options to allow requests only from whitelisted origins
 const corsOptions: CorsOptions = {
   origin: function (origin, callback) {
-    if (whitelist?.indexOf(origin as string) !== -1) {
+    if (whitelist?.indexOf(origin as string) !== -1 || !origin) {
       callback(null, true); // Allow request
     } else {
       callback(

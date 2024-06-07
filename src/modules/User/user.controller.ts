@@ -25,7 +25,21 @@ const getUsers = catchAsync(async (req, res) => {
   });
 });
 
+const createJwtToken = catchAsync(async (req, res) => {
+  const { email } = req.body;
+
+  const result = await UserServices?.createJwtTokenIntoDB(email);
+
+  sendResponse(res, {
+    statusCode: httpStatus?.CREATED,
+    success: true,
+    message: 'Token created successfully!',
+    data: result,
+  });
+});
+
 export const UserControllers = {
   createUser,
   getUsers,
+  createJwtToken,
 };

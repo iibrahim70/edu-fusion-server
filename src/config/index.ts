@@ -8,4 +8,6 @@ export default {
   dbURL: process?.env?.DATABASE_URL,
   dbName: process?.env?.DB_Name,
   nodeEnv: process?.env?.NODE_ENV,
+  jwtAccessSecret: process?.env?.JWT_ACCESS_SECRET,
+  jwtAccessExpiresIn: process?.env?.EXPIRES_IN,
 };
