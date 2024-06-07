@@ -3,6 +3,8 @@ import ApiError from '../../errors/ApiError';
 import { IUser } from './user.interface';
 import { User } from './user.model';
 import { USER_ROLE } from './user.constant';
+import { createToken } from '../../helpers/jwt';
+import config from '../../config';
 
 const createUserIntoDB = async (payload: IUser) => {
   const allowedRoles = [USER_ROLE?.student, USER_ROLE?.tutor, USER_ROLE?.admin];
@@ -17,7 +19,7 @@ const createUserIntoDB = async (payload: IUser) => {
     throw new ApiError(httpStatus?.BAD_REQUEST, 'Invalid role!');
   }
 
-  // disallow creation of admin users through this controller
+  // disallow creation of admin users through this route
   if (payload?.role === 'admin') {
     throw new ApiError(httpStatus?.FORBIDDEN, 'Admin creation not allowed!');
   }
@@ -37,7 +39,33 @@ const getUsersFromDB = async () => {
   return result;
 };
 
+const createJwtTokenIntoDB = async (email: string) => {
+  // Find user by email
+  const existingUser = await User?.findOne({ email });
+  if (!existingUser) {
+    throw new ApiError(httpStatus?.NOT_FOUND, 'User not found!');
+  }
+
+  // Create JWT payload for token generation
+  const jwtPayload = {
+    email: existingUser?.email,
+    role: existingUser?.role as string,
+  };
+
+  // Generate access token for the user
+  const accessToken = createToken(
+    jwtPayload,
+    config?.jwtAccessSecret as string,
+    config?.jwtAccessExpiresIn as string,
+  );
+
+  return {
+    accessToken,
+  };
+};
+
 export const UserServices = {
   createUserIntoDB,
   getUsersFromDB,
+  createJwtTokenIntoDB,
 };
