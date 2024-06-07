@@ -2,9 +2,10 @@ import httpStatus from 'http-status';
 import ApiError from '../../errors/ApiError';
 import { IUser } from './user.interface';
 import { User } from './user.model';
-import { USER_ROLE } from './user.constant';
+import { USER_ROLE, UserSearchableFields } from './user.constant';
 import { createToken } from '../../helpers/jwt';
 import config from '../../config';
+import QueryBuilder from '../../builder/QueryBuilder';
 
 const createUserIntoDB = async (payload: IUser) => {
   const allowedRoles = [USER_ROLE?.student, USER_ROLE?.tutor, USER_ROLE?.admin];
@@ -34,8 +35,14 @@ const createUserIntoDB = async (payload: IUser) => {
   return result;
 };
 
-const getUsersFromDB = async () => {
-  const result = await User?.find();
+const getUsersFromDB = async (query: Record<string, unknown>) => {
+  const usersQuery = new QueryBuilder(User?.find(), query)
+    .search(UserSearchableFields)
+    .sort()
+    .paginate()
+    .fields();
+
+  const result = await usersQuery?.modelQuery;
   return result;
 };
 
