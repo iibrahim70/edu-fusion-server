@@ -14,4 +14,5 @@ export interface ICourse {
   category: string;
   level: string;
   status: 'pending' | 'approve' | 'rejected';
+  feedback?: string;
 }

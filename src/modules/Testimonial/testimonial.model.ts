@@ -5,11 +5,11 @@ import { ITestimonial } from './testimonial.interface';
 const testimonialSchema = new Schema<ITestimonial>(
   {
     createdBy: {
-      type: Schema.Types.ObjectId, // reference to a User
+      type: Schema?.Types?.ObjectId, // reference to a User
       ref: 'User', // reference to the User model
       required: true,
     },
-    message: {
+    review: {
       type: String,
       required: true,
     },

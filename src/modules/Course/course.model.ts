@@ -58,6 +58,9 @@ const courseSchema = new Schema<ICourse>(
       enum: ['pending', 'approve', 'rejected'],
       default: 'pending',
     },
+    feedback: {
+      type: String,
+    },
   },
   { timestamps: true },
 );
