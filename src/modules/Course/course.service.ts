@@ -3,10 +3,17 @@ import ApiError from '../../errors/ApiError';
 import { COURSE_STATUS } from './course.constant';
 import { ICourse } from './course.interface';
 import { Course } from './course.model';
+import { User } from '../User/user.model';
 
 const createCourseIntoDB = async (payload: ICourse) => {
+  // Verify User Existence
+  const existingUser = await User.findById(payload?.userId);
+  if (!existingUser) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'User Not Found!');
+  }
+
   // Enforce status to be pending
-  payload.status = COURSE_STATUS?.pending;
+  payload.status = COURSE_STATUS.pending;
 
   const result = await Course?.create(payload);
   return result;

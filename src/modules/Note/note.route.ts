@@ -5,7 +5,7 @@ const router = Router();
 
 router.get('/:userId', NoteControllers.getNotes);
 router.post('/create-note', NoteControllers.createNote);
-router.patch('/:userId/:noteId', NoteControllers.updateNote);
-router.delete('/:userId/:noteId', NoteControllers.deleteNote);
+router.patch('/update-note/:noteId', NoteControllers.updateNote);
+router.delete('/delete-note/:userId/:noteId', NoteControllers.deleteNote);
 
 export const NoteRoutes = router;

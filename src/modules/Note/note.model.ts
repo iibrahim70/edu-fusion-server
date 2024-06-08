@@ -4,7 +4,7 @@ import { INote } from './note.interface';
 const NoteSchema = new Schema<INote>(
   {
     userId: {
-      type: Schema?.Types?.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: 'User',
       required: true,
     },

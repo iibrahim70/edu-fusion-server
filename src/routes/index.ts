@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { CommentRoutes } from '../modules/Comments/comment.route';
 import { CourseRoutes } from '../modules/Course/course.route';
 import { ModuleRoutes } from '../modules/Module/module.route';
-import { NoteRoutes } from '../modules/Note/rating.route';
+import { NoteRoutes } from '../modules/Note/note.route';
 import { RatingRoutes } from '../modules/Rating/rating.route';
 import { SubModuleRoutes } from '../modules/SubModule/subModule.route';
 import { TestimonialRoutes } from '../modules/Testimonial/testimonial.route';
