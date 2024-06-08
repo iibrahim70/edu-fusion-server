@@ -8,64 +8,76 @@ import config from '../../config';
 import QueryBuilder from '../../builder/QueryBuilder';
 
 const createUserIntoDB = async (payload: IUser) => {
+  // Define the allowed roles for user creation
   const allowedRoles = [USER_ROLE?.student, USER_ROLE?.tutor, USER_ROLE?.admin];
 
-  // Set default role to 'student' if no role is provided
+  // Set default role to 'student' if no role is provided in the payload
   if (!payload?.role) {
     payload.role = USER_ROLE?.student;
   }
 
-  // check if the provided role is valid
+  // Validate the provided role against the allowed roles
   if (!allowedRoles?.includes(payload?.role)) {
     throw new ApiError(httpStatus?.BAD_REQUEST, 'Invalid role!');
   }
 
-  // disallow creation of admin users through this route
+  // Disallow the creation of users with the 'admin' role through this route for security reasons
   if (payload?.role === 'admin') {
     throw new ApiError(httpStatus?.FORBIDDEN, 'Admin creation not allowed!');
   }
 
-  // check if a user with the same email already exists
-  const existingUser = await User?.findOne({ email: payload?.email });
+  // Check if a user with the same email already exists in the database to avoid duplicates
+  const existingUser = await User.findOne({ email: payload?.email });
   if (existingUser) {
     throw new ApiError(httpStatus?.CONFLICT, 'User already exists!');
   }
 
-  const result = await User?.create(payload);
+  // Create a new user with the validated payload
+  const result = await User.create(payload);
   return result;
 };
 
 const getUsersFromDB = async (query: Record<string, unknown>) => {
-  const usersQuery = new QueryBuilder(User?.find(), query)
+  // Define the options to pass to the toJSON method
+  const options = { includeRole: true };
+
+  // Build the query using QueryBuilder with the given query parameters
+  const usersQuery = new QueryBuilder(User.find(), query)
     .search(UserSearchableFields)
     .sort()
     .paginate()
     .fields();
 
-  const result = await usersQuery?.modelQuery;
-  return result;
+  // Execute the query to get the results
+  const users = await usersQuery?.modelQuery;
+
+  // Manually call toJSON with options on each user document to apply transformations
+  const transformedUsers = users?.map((user) => user?.toJSON(options));
+
+  return transformedUsers;
 };
 
 const createJwtTokenIntoDB = async (email: string) => {
-  // Find user by email
-  const existingUser = await User?.findOne({ email });
+  // Find the user by email in the database If the user is not found, throw a 'Not Found' error
+  const existingUser = await User.findOne({ email });
   if (!existingUser) {
     throw new ApiError(httpStatus?.NOT_FOUND, 'User not found!');
   }
 
-  // Create JWT payload for token generation
+  // Prepare the payload for JWT which includes user's email and role
   const jwtPayload = {
     email: existingUser?.email,
-    role: existingUser?.role as string,
+    role: existingUser?.role,
   };
 
-  // Generate access token for the user
+  // Generate the JWT access token using the prepared payload and configurations
   const accessToken = createToken(
     jwtPayload,
-    config?.jwtAccessSecret as string,
-    config?.jwtAccessExpiresIn as string,
+    config?.jwtAccessSecret as string, // The secret key for JWT signing
+    config?.jwtAccessExpiresIn as string, // Token expiration setting
   );
 
+  // Return the access token
   return {
     accessToken,
   };
