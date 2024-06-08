@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose';
 import { IUser } from './user.interface';
 
-// define the User schema
+// Define the User schema with specific data types and rules
 const userSchema = new Schema<IUser>(
   {
     fullName: {
@@ -11,9 +11,9 @@ const userSchema = new Schema<IUser>(
     email: {
       type: String,
       required: true,
-      unique: true,
-      lowercase: true, // convert email to lowercase
-      trim: true, // trim whitespace from email
+      unique: true, // Ensures all emails in the database are unique
+      lowercase: true, // Automatically converts email to lowercase before saving
+      trim: true, // Trims whitespace from both ends of the email before saving
     },
     avatar: {
       type: String,
@@ -21,19 +21,23 @@ const userSchema = new Schema<IUser>(
     },
     role: {
       type: String,
-      enum: ['student', 'tutor', 'admin'], // only allow specific roles
-      default: 'student', // default role is 'student'
+      enum: ['student', 'tutor', 'admin'], // Restricts the role to one of these predefined values
+      default: 'student', // Sets default role to 'student' if none is specified
     },
   },
   { timestamps: true },
 );
 
-// method to remove sensitive fields before returning User object as JSON
-userSchema.methods.toJSON = function () {
-  const userObject = this.toObject();
-  delete userObject?.role;
+// Custom method to modify the JSON representation of user documents
+userSchema.methods.toJSON = function (options: { includeRole?: boolean } = {}) {
+  const userObject = this.toObject(); // Converts the Mongoose document into a plain JavaScript object
+
+  if (!options?.includeRole) {
+    delete userObject.role; // Remove the role property from the object if not required
+  }
+
   return userObject;
 };
 
-// create the User model using the schema
+// Create and export the User model using the defined schema
 export const User = model<IUser>('User', userSchema);
