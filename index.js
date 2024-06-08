@@ -121,37 +121,6 @@ async function run() {
       res.send(result);
     });
 
-    // update the users role student to admin (admin only)
-    app.patch('/users/admin/:id', verifyJWT, verifyAdmin, async (req, res) => {
-      const id = req.params.id;
-      const filter = { _id: new ObjectId(id) };
-      const updateDoc = {
-        $set: {
-          role: 'admin',
-        },
-      };
-      const result = await userCollection.updateOne(filter, updateDoc);
-      res.send(result);
-    });
-
-    // update the users role student to instructor (admin only)
-    app.patch(
-      '/users/instructor/:id',
-      verifyJWT,
-      verifyAdmin,
-      async (req, res) => {
-        const id = req.params.id;
-        const filter = { _id: new ObjectId(id) };
-        const updateDoc = {
-          $set: {
-            role: 'instructor',
-          },
-        };
-        const result = await userCollection.updateOne(filter, updateDoc);
-        res.send(result);
-      },
-    );
-
     // update the instructor classes status approve (admin only)
     app.put(
       '/classes/approve/:id',
