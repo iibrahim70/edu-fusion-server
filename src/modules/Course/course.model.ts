@@ -61,6 +61,13 @@ const courseSchema = new Schema<ICourse>(
     feedback: {
       type: String,
     },
+    rejectionReason: {
+      type: String,
+    },
+    isPaid: {
+      type: Boolean,
+      required: true,
+    },
   },
   { timestamps: true },
 );

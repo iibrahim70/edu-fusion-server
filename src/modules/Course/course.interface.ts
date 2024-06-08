@@ -15,4 +15,6 @@ export interface ICourse {
   level: string;
   status: 'pending' | 'approve' | 'rejected';
   feedback?: string;
+  rejectionReason?: string;
+  isPaid: boolean;
 }
