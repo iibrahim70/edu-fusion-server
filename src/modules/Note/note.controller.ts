@@ -4,7 +4,7 @@ import sendResponse from '../../helpers/sendResponse';
 import { NoteServices } from './note.service';
 
 const createNote = catchAsync(async (req, res) => {
-  const result = await NoteServices.createNoteIntoDB(req?.body);
+  const result = await NoteServices.createNoteIntoDB(req.body);
 
   sendResponse(res, {
     statusCode: httpStatus.CREATED,
@@ -15,7 +15,7 @@ const createNote = catchAsync(async (req, res) => {
 });
 
 const getNotes = catchAsync(async (req, res) => {
-  const result = await NoteServices.getNotesFromDB(req?.params?.userId);
+  const result = await NoteServices.getNotesFromDB(req.params?.userId);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -26,10 +26,10 @@ const getNotes = catchAsync(async (req, res) => {
 });
 
 const updateNote = catchAsync(async (req, res) => {
-  const { userId, noteId } = req.params;
-  const payload = req?.body;
+  const { noteId } = req.params;
+  const payload = req.body;
 
-  const result = await NoteServices.updateNoteIntoDB(userId, noteId, payload);
+  const result = await NoteServices.updateNoteIntoDB(noteId, payload);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
