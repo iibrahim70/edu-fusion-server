@@ -16,6 +16,10 @@ const NoteSchema = new Schema<INote>(
       type: String,
       required: true,
     },
+    priority: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true },
 );
