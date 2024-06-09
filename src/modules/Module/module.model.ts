@@ -8,15 +8,11 @@ const moduleSchema = new Schema<IModule>(
       ref: 'Course',
       required: true,
     },
-    moduleNum: {
-      type: Number,
-      required: true,
-    },
-    title: {
+    moduleTitle: {
       type: String,
       required: true,
     },
-    description: {
+    moduleDescription: {
       type: String,
       required: true,
     },

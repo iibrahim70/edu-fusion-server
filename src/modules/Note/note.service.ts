@@ -42,10 +42,10 @@ const updateNoteIntoDB = async (noteId: string, payload: Partial<INote>) => {
     throw new ApiError(httpStatus.NOT_FOUND, 'Note Not Found!');
   }
 
-  // Check if the note belongs to the user
-  if (existingNote?.userId !== userId) {
-    throw new ApiError(httpStatus.FORBIDDEN, 'Permission denied!');
-  }
+  // // Check if the note belongs to the user
+  // if (existingNote?.userId !== userId) {
+  //   throw new ApiError(httpStatus.FORBIDDEN, 'Permission denied!');
+  // }
 
   const result = await Note.findByIdAndUpdate(noteId, updateData, {
     new: true,
@@ -66,10 +66,10 @@ const deleteNoteFromDB = async (userId: string, noteId: string) => {
     throw new ApiError(httpStatus.NOT_FOUND, 'Note Not Found!');
   }
 
-  // Check if the note belongs to the user
-  if (existingNote.userId?.toString() !== userId) {
-    throw new ApiError(httpStatus.FORBIDDEN, 'Permission denied!');
-  }
+  // // Check if the note belongs to the user
+  // if (existingNote.userId?.toString() !== userId) {
+  //   throw new ApiError(httpStatus.FORBIDDEN, 'Permission denied!');
+  // }
 
   const result = await Note.findByIdAndDelete(noteId);
   return result;

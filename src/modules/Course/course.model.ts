@@ -8,18 +8,21 @@ const courseSchema = new Schema<ICourse>(
       ref: 'User',
       required: true,
     },
-    title: {
+    courseTitle: {
       type: String,
       required: true,
       unique: true,
     },
-    bannerImages: {
-      type: [String],
-      required: true,
-    },
-    description: {
+    courseDescription: {
       type: String,
       required: true,
+    },
+    thumbnail: {
+      type: String,
+      required: true,
+    },
+    bannerImages: {
+      type: [String],
     },
     registrationStartDate: {
       type: Date,
@@ -43,7 +46,7 @@ const courseSchema = new Schema<ICourse>(
     },
     registrationFee: {
       type: Number,
-      required: true,
+      default: 0,
     },
     category: {
       type: String,
@@ -66,6 +69,14 @@ const courseSchema = new Schema<ICourse>(
     },
     isPaid: {
       type: Boolean,
+      required: true,
+    },
+    certificateAvailability: {
+      type: Boolean,
+      required: true,
+    },
+    courseOverviewVideoLink: {
+      type: String,
       required: true,
     },
   },
