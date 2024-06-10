@@ -1,5 +1,6 @@
 import { Schema, model } from 'mongoose';
 import { IUser } from './user.interface';
+import { USER_ROLE } from './user.constant';
 
 // Define the User schema with specific data types and rules
 const userSchema = new Schema<IUser>(
@@ -21,8 +22,8 @@ const userSchema = new Schema<IUser>(
     },
     role: {
       type: String,
-      enum: ['student', 'tutor', 'admin'], // Restricts the role to one of these predefined values
-      default: 'student', // Sets default role to 'student' if none is specified
+      enum: Object.values(USER_ROLE),
+      default: USER_ROLE.student,
     },
   },
   { timestamps: true },
