@@ -5,3 +5,6 @@ export const USER_ROLE = {
   tutor: 'tutor',
   admin: 'admin',
 } as const;
+
+// Type alias for the values of USER_ROLE
+export type UserRole = (typeof USER_ROLE)[keyof typeof USER_ROLE];

@@ -1,5 +1,10 @@
 import { Schema, model } from 'mongoose';
 import { ICourse } from './course.interface';
+import {
+  COURSE_CATEGORY,
+  COURSE_LEVEL,
+  COURSE_STATUS,
+} from './course.constant';
 
 const courseSchema = new Schema<ICourse>(
   {
@@ -46,20 +51,22 @@ const courseSchema = new Schema<ICourse>(
     },
     registrationFee: {
       type: Number,
-      default: 0,
-    },
-    category: {
-      type: String,
       required: true,
     },
-    level: {
+    courseCategory: {
       type: String,
+      enum: Object.values(COURSE_CATEGORY),
       required: true,
     },
-    status: {
+    courseLevel: {
       type: String,
-      enum: ['pending', 'approve', 'rejected'],
-      default: 'pending',
+      enum: Object.values(COURSE_LEVEL),
+      required: true,
+    },
+    courseStatus: {
+      type: String,
+      enum: Object.values(COURSE_STATUS),
+      default: COURSE_STATUS.pending,
     },
     feedback: {
       type: String,
@@ -77,7 +84,6 @@ const courseSchema = new Schema<ICourse>(
     },
     courseOverviewVideoLink: {
       type: String,
-      required: true,
     },
   },
   { timestamps: true },

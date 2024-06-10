@@ -1,4 +1,5 @@
 import { ObjectId } from 'mongoose';
+import { CourseCategory, CourseLevel, CourseStatus } from './course.constant';
 
 export interface ICourse {
   userId: ObjectId;
@@ -11,11 +12,11 @@ export interface ICourse {
   classStartDate: Date;
   classEndDate: Date;
   courseDuration: string;
-  registrationFee?: number;
+  registrationFee: number;
   certificateAvailability: boolean;
-  category: string;
-  level: string;
-  status: 'pending' | 'approve' | 'rejected';
+  courseCategory: CourseCategory;
+  courseLevel: CourseLevel;
+  courseStatus?: CourseStatus;
   feedback?: string;
   rejectionReason?: string;
   isPaid: boolean;
