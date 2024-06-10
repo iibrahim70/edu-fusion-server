@@ -4,10 +4,10 @@ import sendResponse from '../../helpers/sendResponse';
 import { TestimonialServices } from './testimonial.service';
 
 const createTestimonial = catchAsync(async (req, res) => {
-  const result = await TestimonialServices?.createTestimonialIntoDB(req?.body);
+  const result = await TestimonialServices.createTestimonialIntoDB(req?.body);
 
   sendResponse(res, {
-    statusCode: httpStatus?.CREATED,
+    statusCode: httpStatus.CREATED,
     success: true,
     message: 'Testimonial created successfully!',
     data: result,
@@ -15,10 +15,10 @@ const createTestimonial = catchAsync(async (req, res) => {
 });
 
 const getTestimonials = catchAsync(async (req, res) => {
-  const result = await TestimonialServices?.getTestimonialsFromDB();
+  const result = await TestimonialServices.getTestimonialsFromDB();
 
   sendResponse(res, {
-    statusCode: httpStatus?.OK,
+    statusCode: httpStatus.OK,
     success: true,
     message: 'Testimonials retrieved successfully!',
     data: result,
